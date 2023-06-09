@@ -17,7 +17,7 @@ Few samples in the dataset are shown below. [Image taken from S5 assignment]
 
 ### 1. model.py
 
-This file defines the structure of the neural network model used for image classification. The `Net` class is a subclass of `torch.nn.Module` and consists of several convolutional and fully connected layers. The `forward` method implements the forward pass of the model, and the `summary` method provides a summary of the model's architecture.
+This file defines the structure of the neural network model used for image classification. The `Net` class is a subclass of `torch.nn.Module` and consists of several convolutional and fully connected layers. The `forward` method implements the forward pass of the model, and the `summary` method provides a summary of the model's architecture. The network architecture uses batch normalization as part of regularization and uses dropout of 0.30 so that the model gives an improved test accuracy. As we find from the model summary, the total number of parameters this model uses is around 17.5K. 
 
 ```
 ----------------------------------------------------------------
@@ -57,12 +57,25 @@ Params size (MB): 0.07
 Estimated Total Size (MB): 1.18
 ----------------------------------------------------------------
 ```
-This file also has train and test functions which trains the model with a learning rate of 0.1 using batch size of 256. The network architecture uses batch normalization as part of regularization and uses dropout of 0.30 so that the model gives an improved test accuracy. As we find from the model summary, the total number of parameters this model uses is around 17.5K. After training this model for less than 20 epochs, the trained model gave test accuracy as 99.48%.
-
 
 ### 3. S6.ipynb
 
-The `S6.ipynb` file is the main script that runs the image classification project. It imports the necessary libraries and modules, sets up the device ('CUDA', 'MPS' or 'CPU') for training, defines data transformations, loads the MNIST dataset, creates data loaders, plots train data images, initializes the model, trains the model, tests the model's performance, and visualizes incorrectly classified examples.
+The `S6.ipynb` file is the main module that runs the image classification activity for MNIST dataset. It contains the code for training and evaluating a neural network model using the MNIST dataset. The file includes the following components:
+
+        -       Importing necessary libraries and dependencies
+        -       Mounting Google Drive
+        -       Setting up the device (CPU or GPU)
+        -       Defining data transformations for training and testing
+        -       Loading the MNIST dataset
+        -       Setting up data loaders
+        -       Instantiate the neural network model and displaying its summary
+        -       Training the model using SGD optimizer and NLL loss
+        -       Displaying test logs
+
+This file trains the model with a learning rate of 0.1 using batch size of 256. After training this model for less than 20 epochs, the trained model touches test accuracy of 99.44% at the 13th epoch, gives fluctucating accuracy till 19th epoch and at the 19th epoch gives the test accuracy of 99.48%.
+Please note that this README is dynamically generated and serves as a placeholder. As you make further modifications to the project, remember to update this file accordingly. Provide a brief description of each file, its purpose, and its relevance to the project's functionality.
+
+For more detailed information on the project's implementation and code, please refer to the individual files mentioned above.
 
 ## Usage
 
