@@ -1,8 +1,51 @@
 # Part 1 - Back Propogation
 
+## Description
+
+The image of the Excel sheet with back propogation formulae for the given simple NN is as shown below followed by the step-by-step description and the associated formulae.
+
+![Back Propogation Formulae](Test_Images/Back_Propogation_Img.png)
 
 
-# Part 2 - MNIST classification
+## Error / Loss Graphs
+
+### Error Graph for Learning Rate - 0.1
+
+![Loss Graph for LR = 0.1](Test_Images/Loss_Graph_LR0_1.png)
+
+
+### Error Graph for Learning Rate - 0.2
+
+![Loss Graph for LR = 0.2](Test_Images/Loss_Graph_LR0_2.png) 
+
+
+### Error Graph for Learning Rate - 0.5
+
+![Loss Graph for LR = 0.5](Test_Images/Loss_Graph_LR0_5.png) 
+
+
+
+### Error Graph for Learning Rate - 0.8
+
+![Loss Graph for LR = 0.8](Test_Images/Loss_Graph_LR0_8.png)
+
+
+### Error Graph for Learning Rate - 1.0
+
+![Loss Graph for LR = 1.0](Test_Images/Loss_Graph_LR1_0.png)
+
+
+### Error Graph for Learning Rate - 2.0
+
+![Loss Graph for LR = 2.0](Test_Images/Loss_Graph_LR2_0.png) 
+
+
+
+
+
+
+
+# Part 2 - Neural Network Image Classification - MNIST Data Set
 
 ## Description
 
