@@ -40,6 +40,40 @@ The major steps of backpropagation are :
 
 ### 3. Backward Propagation:
 
+#### Calculating ∂E_total/∂w5. Here's a step-by-step breakdown of the calculation:
+
+        Partial derivative of the total error with respect to w5:
+
+                ∂E_total/∂w5 = ∂E1/∂w5
+        Since E_total = E1 + E2, we only consider the derivative of E1 with respect to w5.
+
+        Partial derivative of E1 with respect to a_o1:
+
+                ∂E1/∂a_o1 = (a_o1 - t1)
+        This is derived from the expression E1 = ½ * (t1 - a_o1)².
+
+        Partial derivative of a_o1 with respect to o1:
+
+                ∂a_o1/∂o1 = a_o1 * (1 - a_o1)
+        This is obtained from the derivative of the sigmoid function σ(o1).
+        Partial derivative of o1 with respect to w5:
+
+                ∂o1/∂w5 = a_h1
+        The weight w5 is directly multiplied by the activation value a_h1 in the expression for         o1. By combining these partial derivatives, we can calculate ∂E_total/∂w5 as follows:
+
+        ∂E_total/∂w5 = ∂E1/∂w5 = ∂E1/∂a_o1 * ∂a_o1/∂o1 * ∂o1/∂w5
+                = (a_o1 - t1) * a_o1 * (1 - a_o1) * a_h1
+
+       This expression represents the partial derivative of the total error with respect to the        weight w5 in the neural network. The other partial derivatives you provided follow a            similar calculation pattern for their respective weights.
+       
+       The partial derivatives of the total error with respect to the other respective weights:
+
+                ∂E_total/∂w5 = (a_o1 - t1) * a_o1 * (1 - a_o1) * a_h1
+                ∂E_total/∂w6 = (a_o1 - t1) * a_o1 * (1 - a_o1) * a_h2
+                ∂E_total/∂w7 = (a_o2 - t2) * a_o2 * (1 - a_o2) * a_h1
+                ∂E_total/∂w8 = (a_o2 - t2) * a_o2 * (1 - a_o2) * a_h2
+       These formulae represent the gradients of the total error with respect to the respective        weights. They are used during the weight update step in backpropagation to adjust the            weights of the neural network in the direction that minimizes the error.
+
 #### Compute the gradients of the error with respect to the output layer activations:
 
         δE_total/δa_o1 = (a_o1 - t1)
@@ -59,11 +93,44 @@ The major steps of backpropagation are :
 
         δa_h1/δh1 = σ'(h1) = σ(h1) * (1 - σ(h1))
         δa_h2/δh2 = σ'(h2) = σ(h2) * (1 - σ(h2))
-        
+
+#### Compute the gradients of the error with respect to the Hidden layer activations
+The following expressions represent the gradients of the total error with respect to the activations of the hidden layer nodes. They are used in backpropagation to propagate the error from the output layer to the hidden layer, allowing for weight updates in the hidden layer as well.
+
+        ∂E1/∂a_h1 = (a_o1 - t1) * a_o1 * (1 - a_o1) * w5
+
+        ∂E2/∂a_h1 = (a_o2 - t2) * a_o2 * (1 - a_o2) * w7
+
+        ∂E_total/∂a_h1 = (a_o1 - t1) * a_o1 * (1 - a_o1) * w5 + (a_o2 - t2) * a_o2 * (1 - a_o2) * w7
+
+        ∂E1/∂a_h2 = (a_o1 - t1) * a_o1 * (1 - a_o1) * w6
+
+        ∂E2/∂a_h2 = (a_o2 - t2) * a_o2 * (1 - a_o2) * w8
+
+        ∂E_total/∂a_h2 = (a_o1 - t1) * a_o1 * (1 - a_o1) * w6 + (a_o2 - t2) * a_o2 * (1 - a_o2) * w8
+
 #### Compute the gradients of the error with respect to the hidden layer weighted sums:
 
-δE_total/δh1 = (δE_total/δo1 * w5 + δE_total/δo2 * w7) * δa_h1/δh1
-δE_total/δh2 = (δE_total/δo1 * w6 + δE_total/δo2 * w8) * δa_h2/δh2
+        δE_total/δh1 = (δE_total/δo1 * w5 + δE_total/δo2 * w7) * δa_h1/δh1
+        δE_total/δh2 = (δE_total/δo1 * w6 + δE_total/δo2 * w8) * δa_h2/δh2
+
+#### Compute the total error with respect to the weights connecting input-hidden layers
+        The following formulae are used to calculate the partial derivatives of the total error with respect to the weights connecting the input layer to the hidden layer:
+
+        ∂E_total/∂w1 = ∂E_total/∂a_h1 * ∂a_h1/∂h1 * ∂h1/∂w1
+        ∂E_total/∂w2 = ∂E_total/∂a_h1 * ∂a_h1/∂h1 * ∂h1/∂w2
+        ∂E_total/∂w3 = ∂E_total/∂a_h2 * ∂a_h2/∂h2 * ∂h2/∂w3
+        These formulae involve the chain rule, allowing the gradients to be propagated from the output layer through the hidden layer to the input layer. By calculating these partial                  derivatives, you can determine the adjustments needed for the weights connecting the input layer to the hidden layer during the weight update step in backpropagation.
+        
+
+        The partial derivatives of the total error with respect to the weights connecting the input layer to the hidden layer:
+
+        ∂E_total/∂w1 = ((a_o1 - t1) * a_o1 * (1 - a_o1) * w5 + (a_o2 - t2) * a_o2 * (1 - a_o2) * w7) * a_h1 * (1 - a_h1) * i1
+        ∂E_total/∂w2 = ((a_o1 - t1) * a_o1 * (1 - a_o1) * w5 + (a_o2 - t2) * a_o2 * (1 - a_o2) * w7) * a_h1 * (1 - a_h1) * i2
+        ∂E_total/∂w3 = ((a_o1 - t1) * a_o1 * (1 - a_o1) * w6 + (a_o2 - t2) * a_o2 * (1 - a_o2) * w8) * a_h2 * (1 - a_h2) * i1
+        ∂E_total/∂w4 = ((a_o1 - t1) * a_o1 * (1 - a_o1) * w6 + (a_o2 - t2) * a_o2 * (1 - a_o2) * w8) * a_h2 * (1 - a_h2) * i2
+        
+       These equations represent the gradients of the total error with respect to the weights connecting the input layer to the hidden layer. They take into account the contributions of the          output layer errors, the activations of the hidden layer nodes, and the inputs from the input layer. These partial derivatives are used to update the weights during the backpropagation        process.
 
 ### 4. Weight Update:
 
